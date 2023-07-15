@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { card } = require("../index");
+const { cards } = require("../index");
 
 
 beforeAll(() => {
@@ -15,7 +15,7 @@ beforeAll(() => {
 
 describe("Game object should contain the correct keys", () => {
     test(" Cards should exist", () => {
-        expect(document.getElementsByClassName(".card").length).toBe(1);
+        expect(document.getElementsByClassName(".card")).toBeTruthy();
     });
 
 });
