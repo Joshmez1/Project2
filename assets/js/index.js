@@ -10,8 +10,12 @@ const loadGameOfThrones= async () => {
     randomIds.add(randomNumber)
   }
 
-  const gotPromise = [...randomIds].map(id => fetch(gotAPIBaseURL  + id ));
-console.log (gotPromise);
+  const gotPromises = [...randomIds].map(id => fetch(gotAPIBaseURL  + id ));
+  const responses = await Promise.all(gotPromises);
+  const got = await Promise.all(responses.map(res => res.json ()));
+  
+
+console.log (got);
 
 
   // const gameofthrones = await res.json();
