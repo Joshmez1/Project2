@@ -12,17 +12,27 @@ const loadGameOfThrones= async () => {
 
   const gotPromises = [...randomIds].map(id => fetch(gotAPIBaseURL  + id ));
   const responses = await Promise.all(gotPromises);
-  const got = await Promise.all(responses.map(res => res.json ()));
-  
-
-console.log (got);
-
-
-  // const gameofthrones = await res.json();
+  return await Promise.all(responses.map(res => res.json ()));
   
 };
 
-  loadGameOfThrones ();
+// found this way of generating through Ania Kubow "online course creator - freecodecamp"
+
+const displayGameOfThrones =(gameOfThrones) => {
+ gameOfThrones.sort( _ => Math.random() - 0.5);
+ gameOfThrones.map (p => console.log(p.fullName));
+}
+
+const newGame = async () => {
+  const gameOfThrones = await loadGameOfThrones(); 
+  displayGameOfThrones([...gameOfThrones, ...gameOfThrones]);
+}
+
+
+  
+
+
+  newGame ();
 
 
 
