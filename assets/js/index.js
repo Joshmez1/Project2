@@ -20,7 +20,13 @@ const loadGameOfThrones= async () => {
 
 const displayGameOfThrones =(gameOfThrones) => {
  gameOfThrones.sort( _ => Math.random() - 0.5);
- gameOfThrones.map (p => console.log(p.fullName));
+  console.log (gameOfThrones.map (gameOfThrones => {
+   return `
+    <div class="card">
+ <h2>${gameOfThrones.fullName}
+    </div>
+   `
+ }))
 }
 
 const newGame = async () => {
