@@ -1,48 +1,39 @@
-// Loads Game Of Thrones API // 
+// Loads Game Of Thrones API //
 
+const gotAPIBaseURL = 'https://thronesapi.com/api/v2/Characters/';
+const game = document.getElementById('game');
 
-const gotAPIBaseURL = "https://thronesapi.com/api/v2/Characters/";
-
-const loadGameOfThrones= async () => {
+const loadGameOfThrones = async () => {
   const randomIds = new Set();
-  while(randomIds.size < 16 ) {
-    const randomNumber = Math.floor(Math.random() * 53 );
-    randomIds.add(randomNumber)
+  while (randomIds.size < 16) {
+    const randomNumber = Math.floor(Math.random() * 53);
+    randomIds.add(randomNumber);
   }
 
-  const gotPromises = [...randomIds].map(id => fetch(gotAPIBaseURL  + id ));
+  const gotPromises = [...randomIds].map((id) => fetch(gotAPIBaseURL + id));
   const responses = await Promise.all(gotPromises);
-  return await Promise.all(responses.map(res => res.json ()));
-  
+  return await Promise.all(responses.map((res) => res.json()));
 };
 
 // found this way of generating through Ania Kubow "online course creator - freecodecamp"
 
-const displayGameOfThrones =(gameOfThrones) => {
- gameOfThrones.sort( _ => Math.random() - 0.5);
-  console.log (gameOfThrones.map (gameOfThrones => {
-   return `
+const displayGameOfThrones = (gameOfThrones) => {
+  gameOfThrones.sort((_) => Math.random() - 0.5);
+  const gameOfThronesHTML = gameOfThrones
+    .map((gameOfThrones) => {
+      return `
     <div class="card">
  <h2>${gameOfThrones.fullName}
     </div>
-   `
- }))
-}
+   `;
+    })
+    .join('');
+  game.innerHTML = gameOfThronesHTML;
+};
 
 const newGame = async () => {
-  const gameOfThrones = await loadGameOfThrones(); 
+  const gameOfThrones = await loadGameOfThrones();
   displayGameOfThrones([...gameOfThrones, ...gameOfThrones]);
-}
+};
 
-
-  
-
-
-  newGame ();
-
-
-
-
-
-
-
+newGame();
