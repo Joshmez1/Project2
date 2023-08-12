@@ -5,7 +5,7 @@ const game = document.getElementById('game');
 
 const loadGameOfThrones = async () => {
   const randomIds = new Set();
-  while (randomIds.size < 16) {
+  while (randomIds.size < 8) {
     const randomNumber = Math.floor(Math.random() * 53);
     randomIds.add(randomNumber);
   }
@@ -23,7 +23,11 @@ const displayGameOfThrones = (gameOfThrones) => {
     .map((gameOfThrones) => {
       return `
     <div class="card">
- <h2>${gameOfThrones.fullName}
+    <div class="card-front">
+    </div>
+    <div class="card-back">
+    <img src="${gameOfThrones.imageUrl}" alt="${gameOfThrones.fullName}" />
+ </div>
     </div>
    `;
     })
